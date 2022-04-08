@@ -6,7 +6,7 @@ pipeline {
                 timeout(time: 1, unit: 'HOURS')
             }
             steps {
-                echo 'Hello World66222'
+                echo 'Hello World662222'
             }
         }
     }
