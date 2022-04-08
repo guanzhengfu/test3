@@ -3,15 +3,15 @@ pipeline {
     triggers {
         GenericTrigger(
                 genericVariables: [
-                        [key: 'commit', value: '$.commits[0].id'],
-                        [key: 'committer', value: '$.commits[0].committer.name'],
                         [key: 'ref', value: '$.ref']
                 ],
-                token: 'test',
-                causeString: 'Triggered by github webhook on commit $commit to $ref by $committer',
+                causeString: 'Triggered on $ref',
+                token: 'abc123',
                 printContributedVariables: true,
                 printPostContent: true,
-                silentResponse: true
+                silentResponse: false,
+                regexpFilterText: '$ref',
+                regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
         )
     }
     stages {
