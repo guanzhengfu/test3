@@ -14,12 +14,58 @@ pipeline {
         )
     }
     stages {
-        stage('Example') {
-            options {
-                timeout(time: 1, unit: 'HOURS')
-            }
+        stage('Checkout') {
             steps {
-                echo 'Hello World66333344455666665551111122221'
+                checkout([
+                        $class                           : 'GitSCM',
+                        branches                         : [[name: '*/master']],
+                        doGenerateSubmoduleConfigurations: false
+                ])
+            }
+        }
+
+        stage('Confirm qa') {
+            options {
+                timeout(time: 840, unit: 'SECONDS')
+            }
+
+            input {
+                message 'Do you want to delpoy to qa?'
+                ok 'Yes, go ahead.'
+            }
+
+            steps {
+                echo 'qa'
+            }
+        }
+
+        stage('Confirm staging') {
+            options {
+                timeout(time: 840, unit: 'SECONDS')
+            }
+
+            input {
+                message 'Do you want to delpoy to staging?'
+                ok 'Yes, go ahead.'
+            }
+
+            steps {
+                echo 'staging'
+            }
+        }
+
+        stage('Confirm prod') {
+            options {
+                timeout(time: 840, unit: 'SECONDS')
+            }
+
+            input {
+                message 'Do you want to delpoy to prod?'
+                ok 'Yes, go ahead.'
+            }
+
+            steps {
+                echo 'prod'
             }
         }
     }
