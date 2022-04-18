@@ -35,6 +35,7 @@ pipeline {
             }
 
             steps {
+                sh 'chmod 777 test.sh'
                 sh './test.sh'
                 echo 'qa'
             }
